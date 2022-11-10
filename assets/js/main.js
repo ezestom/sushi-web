@@ -83,24 +83,43 @@ const selectedIcon = localStorage.getItem("selected-icon");
 // We obtain the current theme that the interface has by validating the dark-theme class
 const getCurrentTheme = () =>
 	document.body.classList.contains(darTheme) ? "dark" : "light";
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+const getCurrentIcon = () =>
+	themeButton.classList.contains(iconTheme) ? "ri-moon-line" : "ri-sun-line";
 
 // We validate if the user previously chose a topic
-if(selectedTheme){
+if (selectedTheme) {
 	//If the validation is fulfilled, we ask what the issue was to know if we activated or desactivated the dark theme
-	document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-	themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme)
+	document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
+		darkTheme
+	);
+	themeButton.classList[selectedIcon === "ri-moon-line" ? "add" : "remove"](
+		iconTheme
+	);
 }
 
 // Activate / desactivate the theme manually with the button
-themeButton.addEventListener('click', () =>{
+themeButton.addEventListener("click", () => {
 	// Add or remove the dark / icon theme
-	document.body.classList.toggle(darkTheme)
-	themeButton.classList.toggle(iconTheme)
+	document.body.classList.toggle(darkTheme);
+	themeButton.classList.toggle(iconTheme);
 	// We save the theme and the current icon that the user chose
-	localStorage.setIem('selected-theme', getCurrentTheme())
-	localStorage.setItem('selected-icon', getCurrentIcon())
-
-})
+	localStorage.setIem("selected-theme", getCurrentTheme());
+	localStorage.setItem("selected-icon", getCurrentIcon());
+});
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
+const sr = ScrollReveal({
+	origin: "top",
+	distance: "60px",
+	duration: 2500,
+	delay: 400,
+	//reset: true, // Animations repeat
+});
+
+sr.reveal(
+	`.home__img, .newsletter__container, .footer__logo, .footer__description, .footer__content, .footer__info `
+);
+sr.reveal(`.home__data`, { origin: "bottom" });
+sr.reveal(`.about__data, .recently__data`, { origin: "left" });
+sr.reveal(`.about__img, recently__img`, { origin: "right" });
+sr.reveal(`.popular__card`, { interval: 100 });
